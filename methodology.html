@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERIS - Research Methodology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f1f5f9;
+            --text: #334155;
+            --text-light: #64748b;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --phase1: #6366f1;
+            --phase2: #8b5cf6;
+            --phase3: #ec4899;
+            --phase4: #10b981;
+            --code-bg: #1e1e3f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            background: linear-gradient(135deg, var(--phase1), var(--phase4));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--light) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Pipeline Overview */
+        .pipeline-overview {
+            padding: 3rem 0;
+        }
+
+        .pipeline-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .pipeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 1rem;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+            min-width: 180px;
+        }
+
+        .pipeline-step:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .pipeline-step.phase1 { border-color: var(--phase1); }
+        .pipeline-step.phase2 { border-color: var(--phase2); }
+        .pipeline-step.phase3 { border-color: var(--phase3); }
+        .pipeline-step.phase4 { border-color: var(--phase4); }
+
+        .pipeline-step .icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .phase1 .icon { background: rgba(99, 102, 241, 0.2); color: var(--phase1); }
+        .phase2 .icon { background: rgba(139, 92, 246, 0.2); color: var(--phase2); }
+        .phase3 .icon { background: rgba(236, 72, 153, 0.2); color: var(--phase3); }
+        .phase4 .icon { background: rgba(16, 185, 129, 0.2); color: var(--phase4); }
+
+        .pipeline-step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pipeline-step p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .pipeline-arrow {
+            font-size: 2rem;
+            color: var(--text-light);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Phase Cards */
+        .phase-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .phase-number {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .phase1-card .phase-number { background: linear-gradient(135deg, var(--phase1), #818cf8); }
+        .phase2-card .phase-number { background: linear-gradient(135deg, var(--phase2), #a78bfa); }
+        .phase3-card .phase-number { background: linear-gradient(135deg, var(--phase3), #f472b6); }
+        .phase4-card .phase-number { background: linear-gradient(135deg, var(--phase4), #34d399); }
+
+        .phase-title h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .phase-title span {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .phase-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .phase-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .phase-description h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .phase-description p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .phase-description ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .phase-description li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .phase-description li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Code Block */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .code-block .comment {
+            color: #6a9955;
+        }
+
+        .code-block .keyword {
+            color: #c586c0;
+        }
+
+        .code-block .function {
+            color: #dcdcaa;
+        }
+
+        .code-block .string {
+            color: #ce9178;
+        }
+
+        .code-block .class {
+            color: #4ec9b0;
+        }
+
+        .code-block .number {
+            color: #b5cea8;
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .code-header span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .code-header i {
+            color: var(--accent);
+        }
+
+        /* Data Flow Diagram */
+        .data-flow {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 1rem;
+            border: 1px dashed rgba(255,255,255,0.1);
+        }
+
+        .data-flow h4 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .flow-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .flow-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .flow-item .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(79, 70, 229, 0.2);
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-item span {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .flow-arrow {
+            color: var(--text-light);
+            font-size: 1.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-card .label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Technical Details */
+        .tech-details {
+            background: rgba(0,0,0,0.2);
+            padding: 3rem 0;
+            margin-top: 2rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-card {
+            background: rgba(255,255,255,0.03);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .tech-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .tech-card h4 i {
+            color: var(--accent);
+        }
+
+        .tech-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tech-card li {
+            padding: 0.4rem 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Architecture Section */
+        .architecture {
+            margin: 3rem 0;
+        }
+
+        .architecture-diagram {
+            background: rgba(0,0,0,0.3);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .arch-layer {
+            background: rgba(255,255,255,0.05);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .arch-layer h5 {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .arch-modules {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .arch-module {
+            background: linear-gradient(135deg, var(--primary), var(--phase2));
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-light);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Navigation for phases */
+        .phase-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 50;
+        }
+
+        .phase-nav a {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+
+        .phase-nav a:hover, .phase-nav a.active {
+            transform: scale(1.3);
+        }
+
+        .phase-nav a.p1 { background: var(--phase1); }
+        .phase-nav a.p2 { background: var(--phase2); }
+        .phase-nav a.p3 { background: var(--phase3); }
+        .phase-nav a.p4 { background: var(--phase4); }
+
+        @media (max-width: 768px) {
+            .phase-nav {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .pipeline-visual {
+                flex-direction: column;
+            }
+            
+            .pipeline-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-code-branch"></i>
+                ERIS
+            </div>
+            <nav>
+                <a href="index.html">About</a>
+                <a href="methodology.html" class="active">Methodology</a>
+                <a href="results.html">Results</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Side Navigation -->
+    <div class="phase-nav">
+        <a href="#phase1" class="p1" title="Phase 1"></a>
+        <a href="#phase2" class="p2" title="Phase 2"></a>
+        <a href="#phase3" class="p3" title="Phase 3"></a>
+        <a href="#phase4" class="p4" title="Phase 4"></a>
+    </div>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container">
+                <h1><i class="fas fa-cogs"></i> Research Methodology</h1>
+                <p>A detailed walkthrough of our automated 4-phase research pipeline for collecting, mining, classifying, and analyzing hybrid Android applications from sensitive domains.</p>
+            </div>
+        </section>
+
+        <!-- Pipeline Overview -->
+        <section class="pipeline-overview">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Pipeline Architecture</h2>
+                    <p>Our research methodology follows a systematic 4-phase approach orchestrated by <code>run_pipeline.py</code></p>
+                </div>
+
+                <div class="pipeline-visual">
+                    <div class="pipeline-step phase1" onclick="scrollToPhase('phase1')">
+                        <div class="icon"><i class="fas fa-download"></i></div>
+                        <h3>Phase 1</h3>
+                        <p>Data Collection</p>
+                    </div>
+                    <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="pipeline-step phase2" onclick="scrollToPhase('phase2')">
+                        <div class="icon"><i class="fas fa-database"></i></div>
+                        <h3>Phase 2</h3>
+                        <p>Artifact Mining</p>
+                    </div>
+                    <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="pipeline-step phase3" onclick="scrollToPhase('phase3')">
+                        <div class="icon"><i class="fas fa-tags"></i></div>
+                        <h3>Phase 3</h3>
+                        <p>Classification</p>
+                    </div>
+                    <div class="pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="pipeline-step phase4" onclick="scrollToPhase('phase4')">
+                        <div class="icon"><i class="fas fa-chart-bar"></i></div>
+                        <h3>Phase 4</h3>
+                        <p>Analysis</p>
+                    </div>
+                </div>
+
+                <!-- Main Orchestrator -->
+                <div class="code-block">
+                    <div class="code-header">
+                        <span><i class="fab fa-python"></i> run_pipeline.py - Main Orchestrator</span>
+                    </div>
+<pre><span class="comment"># Command-line interface to run the full pipeline or individual phases</span>
+<span class="keyword">def</span> <span class="function">main</span>():
+    parser = argparse.ArgumentParser(description=<span class="string">'Hybrid Android Apps Research Pipeline'</span>)
+    parser.add_argument(<span class="string">'--phase'</span>, type=int, choices=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], help=<span class="string">'Run specific phase'</span>)
+    parser.add_argument(<span class="string">'--all'</span>, action=<span class="string">'store_true'</span>, help=<span class="string">'Run all phases sequentially'</span>)
+    parser.add_argument(<span class="string">'--sample-size'</span>, type=int, default=<span class="number">10</span>, help=<span class="string">'Number of repos to mine'</span>)
+    
+    <span class="keyword">if</span> args.all:
+        <span class="function">run_phase1_collection</span>(skip_fdroid, skip_github)  <span class="comment"># Collect from F-Droid + GitHub</span>
+        <span class="function">run_phase2_mining</span>(args.sample_size)              <span class="comment"># Mine issues & commits</span>
+        <span class="function">run_phase3_classification</span>()                       <span class="comment"># Classify hybrid issues</span>
+        <span class="function">run_phase4_analysis</span>()                              <span class="comment"># Generate RQ analysis</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 1 -->
+        <section id="phase1" class="section">
+            <div class="container">
+                <div class="phase-card phase1-card animate-in">
+                    <div class="phase-header">
+                        <div class="phase-number">01</div>
+                        <div class="phase-title">
+                            <h3>Data Collection</h3>
+                            <span>F-Droid & GitHub Repository Collection</span>
+                        </div>
+                    </div>
+                    
+                    <div class="phase-content">
+                        <div class="phase-description">
+                            <h4>What This Phase Does</h4>
+                            <p>Phase 1 collects Android applications and repositories from two primary sources: F-Droid (open-source app repository) and GitHub (source code hosting).</p>
+                            
+                            <h4 style="margin-top: 1.5rem;">Key Operations</h4>
+                            <ul>
+                                <li><strong>F-Droid Collection:</strong> Fetches the complete F-Droid index from <code>f-droid.org/repo/index-v2.json</code></li>
+                                <li><strong>Domain Classification:</strong> Uses keyword matching to identify apps from sensitive domains (healthcare, finance, education, public services)</li>
+                                <li><strong>Hybrid Detection:</strong> Searches for hybrid technology indicators (Cordova, React Native, Flutter, WebView)</li>
+                                <li><strong>GitHub Search:</strong> Queries GitHub API for Android repositories matching hybrid framework patterns</li>
+                                <li><strong>Star Filtering:</strong> Filters repositories by minimum star count to ensure quality</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span><i class="fab fa-python"></i> fdroid_collector.py</span>
+                                </div>
+<pre><span class="keyword">class</span> <span class="class">FDroidCollector</span>:
+    <span class="keyword">def</span> <span class="function">fetch_index</span>(self):
+        <span class="comment"># Fetch complete F-Droid repository index</span>
+        response = self.session.get(FDROID_INDEX_URL)
+        <span class="keyword">return</span> response.json()
+    
+    <span class="keyword">def</span> <span class="function">classify_domain</span>(self, app):
+        <span class="comment"># Match keywords against app metadata</span>
+        text = f<span class="string">"{app.name} {app.description}"</span>
+        <span class="keyword">for</span> domain, keywords <span class="keyword">in</span> SENSITIVE_DOMAINS.items():
+            <span class="keyword">if</span> <span class="keyword">any</span>(kw <span class="keyword">in</span> text.lower() <span class="keyword">for</span> kw <span class="keyword">in</span> keywords):
+                <span class="keyword">return</span> domain
+    
+    <span class="keyword">def</span> <span class="function">detect_hybrid</span>(self, app):
+        <span class="comment"># Check for hybrid framework indicators</span>
+        <span class="keyword">for</span> indicator <span class="keyword">in</span> HYBRID_INDICATORS:
+            <span class="keyword">if</span> indicator <span class="keyword">in</span> app.description.lower():
+                <span class="keyword">return</span> <span class="keyword">True</span></pre>
+                            </div>
+                            
+                            <div class="data-flow">
+                                <h4><i class="fas fa-stream"></i> Data Flow</h4>
+                                <div class="flow-items">
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-globe"></i></div>
+                                        <span>F-Droid API</span>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-filter"></i></div>
+                                        <span>Domain Filter</span>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-file-alt"></i></div>
+                                        <span>JSON Output</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="value">4,111</div>
+                            <div class="label">Total F-Droid Apps Scanned</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="value">1,405</div>
+                            <div class="label">Sensitive Domain Apps</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="value">84</div>
+                            <div class="label">Hybrid Candidates Found</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="value">429</div>
+                            <div class="label">GitHub Repos Collected</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 2 -->
+        <section id="phase2" class="section">
+            <div class="container">
+                <div class="phase-card phase2-card animate-in">
+                    <div class="phase-header">
+                        <div class="phase-number">02</div>
+                        <div class="phase-title">
+                            <h3>Artifact Mining</h3>
+                            <span>Issues & Commits Extraction from GitHub</span>
+                        </div>
+                    </div>
+                    
+                    <div class="phase-content">
+                        <div class="phase-description">
+                            <h4>What This Phase Does</h4>
+                            <p>Phase 2 mines development artifacts (issues and commits) from the GitHub repositories identified in Phase 1. This extracts the raw data needed for classification.</p>
+                            
+                            <h4 style="margin-top: 1.5rem;">Key Operations</h4>
+                            <ul>
+                                <li><strong>Issue Mining:</strong> Fetches all issues (open/closed) with labels, comments, and metadata</li>
+                                <li><strong>Commit Mining:</strong> Extracts commit messages and changed files from repository history</li>
+                                <li><strong>Rate Limiting:</strong> Handles GitHub API limits with automatic backoff and retry</li>
+                                <li><strong>Sample Selection:</strong> Processes a configurable sample of repositories (--sample-size)</li>
+                                <li><strong>Data Persistence:</strong> Saves mined artifacts to JSON for reproducibility</li>
+                            </ul>
+                            
+                            <h4 style="margin-top: 1.5rem;">Rate Limit Handling</h4>
+                            <p>The miner implements intelligent rate limiting to respect GitHub API constraints:</p>
+                            <ul>
+                                <li>Monitors <code>X-RateLimit-Remaining</code> header</li>
+                                <li>Pauses automatically when limit drops below 5</li>
+                                <li>Calculates wait time from <code>X-RateLimit-Reset</code></li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span><i class="fab fa-python"></i> artifact_miner.py</span>
+                                </div>
+<pre><span class="keyword">class</span> <span class="class">ArtifactMiner</span>:
+    <span class="keyword">def</span> <span class="function">mine_issues</span>(self, owner, repo, max_issues=<span class="number">100</span>):
+        <span class="string">"""Mine issues from a GitHub repository."""</span>
+        url = f<span class="string">"{GITHUB_API_BASE}/repos/{owner}/{repo}/issues"</span>
+        params = {
+            <span class="string">'state'</span>: <span class="string">'all'</span>,       <span class="comment"># Open + closed issues</span>
+            <span class="string">'per_page'</span>: <span class="number">100</span>,      <span class="comment"># Max per request</span>
+            <span class="string">'sort'</span>: <span class="string">'created'</span>
+        }
+        <span class="keyword">return</span> self._paginate_request(url, params)
+    
+    <span class="keyword">def</span> <span class="function">mine_commits</span>(self, owner, repo, max_commits=<span class="number">100</span>):
+        <span class="string">"""Mine commits from repository history."""</span>
+        url = f<span class="string">"{GITHUB_API_BASE}/repos/{owner}/{repo}/commits"</span>
+        <span class="keyword">for</span> commit <span class="keyword">in</span> self._paginate_request(url):
+            <span class="keyword">yield</span> Commit(
+                sha=commit[<span class="string">'sha'</span>],
+                message=commit[<span class="string">'commit'</span>][<span class="string">'message'</span>],
+                author=commit[<span class="string">'commit'</span>][<span class="string">'author'</span>][<span class="string">'name'</span>]
+            )</pre>
+                            </div>
+                            
+                            <div class="data-flow">
+                                <h4><i class="fas fa-code-branch"></i> Mining Process</h4>
+                                <div class="flow-items">
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fab fa-github"></i></div>
+                                        <span>GitHub API</span>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-bug"></i></div>
+                                        <span>Issues</span>
+                                    </div>
+                                    <div class="flow-arrow">+</div>
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-code-commit"></i></div>
+                                        <span>Commits</span>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-save"></i></div>
+                                        <span>JSON Files</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="value">589</div>
+                            <div class="label">Issues Mined</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="value">1,933</div>
+                            <div class="label">Commits Collected</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="value">10</div>
+                            <div class="label">Repos Sampled</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="value">~2s</div>
+                            <div class="label">Rate Limit Delay</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 3 -->
+        <section id="phase3" class="section">
+            <div class="container">
+                <div class="phase-card phase3-card animate-in">
+                    <div class="phase-header">
+                        <div class="phase-number">03</div>
+                        <div class="phase-title">
+                            <h3>Issue Classification</h3>
+                            <span>Keyword & Pattern-Based Categorization</span>
+                        </div>
+                    </div>
+                    
+                    <div class="phase-content">
+                        <div class="phase-description">
+                            <h4>What This Phase Does</h4>
+                            <p>Phase 3 classifies each issue and commit into hybrid-specific categories using regex pattern matching and keyword analysis.</p>
+                            
+                            <h4 style="margin-top: 1.5rem;">Classification Categories</h4>
+                            <ul>
+                                <li><strong>WebView Configuration:</strong> Issues related to WebView settings, rendering, and configuration</li>
+                                <li><strong>JavaScript Interface:</strong> Problems with Java-JavaScript bridge communication</li>
+                                <li><strong>Lifecycle Issues:</strong> Activity/Fragment lifecycle conflicts with WebView</li>
+                                <li><strong>Security Concerns:</strong> SSL, CORS, XSS, and mixed content issues</li>
+                                <li><strong>Performance:</strong> Memory leaks, slow loading, ANR issues</li>
+                                <li><strong>Cross-Language:</strong> Native-to-web and web-to-native communication problems</li>
+                            </ul>
+                            
+                            <h4 style="margin-top: 1.5rem;">Confidence Scoring</h4>
+                            <p>Each classification includes a confidence score based on:</p>
+                            <ul>
+                                <li>Number of matched keywords</li>
+                                <li>Strength of pattern matches</li>
+                                <li>Context around matches</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span><i class="fab fa-python"></i> issue_classifier.py</span>
+                                </div>
+<pre><span class="keyword">class</span> <span class="class">IssueClassifier</span>:
+    extended_patterns = {
+        <span class="string">'webview_error'</span>: [
+            r<span class="string">'webview.*(?:crash|error|exception|fail)'</span>,
+            r<span class="string">'ERR_.*FAILED'</span>, r<span class="string">'net::ERR_'</span>,
+        ],
+        <span class="string">'javascript_bridge'</span>: [
+            r<span class="string">'javascript.*(?:interface|bridge|callback)'</span>,
+            r<span class="string">'@JavascriptInterface'</span>,
+            r<span class="string">'addJavascriptInterface'</span>,
+        ],
+        <span class="string">'security'</span>: [
+            r<span class="string">'(?:ssl|https|certificate).*(?:error|invalid)'</span>,
+            r<span class="string">'(?:xss|injection|vulnerability)'</span>,
+            r<span class="string">'mixed.*content'</span>,
+        ],
+    }
+    
+    <span class="keyword">def</span> <span class="function">classify</span>(self, text):
+        <span class="comment"># Match patterns and calculate confidence</span>
+        <span class="keyword">for</span> category, patterns <span class="keyword">in</span> self.compiled_patterns:
+            <span class="keyword">for</span> pattern <span class="keyword">in</span> patterns:
+                <span class="keyword">if</span> pattern.search(text):
+                    matches.append(category)</pre>
+                            </div>
+                            
+                            <div class="data-flow">
+                                <h4><i class="fas fa-filter"></i> Classification Flow</h4>
+                                <div class="flow-items">
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-file-alt"></i></div>
+                                        <span>Raw Issues</span>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-search"></i></div>
+                                        <span>Regex Match</span>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-percentage"></i></div>
+                                        <span>Score</span>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-tags"></i></div>
+                                        <span>Categories</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="value">54</div>
+                            <div class="label">Hybrid-Related Issues</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="value">9.2%</div>
+                            <div class="label">Classification Rate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="value">6</div>
+                            <div class="label">Categories Defined</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="value">13</div>
+                            <div class="label">Hybrid Commits</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 4 -->
+        <section id="phase4" class="section">
+            <div class="container">
+                <div class="phase-card phase4-card animate-in">
+                    <div class="phase-header">
+                        <div class="phase-number">04</div>
+                        <div class="phase-title">
+                            <h3>Research Analysis</h3>
+                            <span>Answering Research Questions (RQ1-RQ4)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="phase-content">
+                        <div class="phase-description">
+                            <h4>What This Phase Does</h4>
+                            <p>Phase 4 analyzes the classified data to answer the four research questions defined in the study.</p>
+                            
+                            <h4 style="margin-top: 1.5rem;">Research Questions</h4>
+                            <ul>
+                                <li><strong>RQ1 - Frequency:</strong> How often do hybrid-specific issues appear in development histories?</li>
+                                <li><strong>RQ2 - Categories:</strong> What types of hybrid-specific issues are most common?</li>
+                                <li><strong>RQ3 - Manifestation:</strong> How do these issues manifest in artifacts (issues vs commits)?</li>
+                                <li><strong>RQ4 - Domain Differences:</strong> Do issue patterns vary across sensitive domains?</li>
+                            </ul>
+                            
+                            <h4 style="margin-top: 1.5rem;">Statistical Methods</h4>
+                            <ul>
+                                <li>Frequency distributions and percentages</li>
+                                <li>Per-repository aggregation</li>
+                                <li>Cross-domain comparison</li>
+                                <li>Mean, median, and standard deviation</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span><i class="fab fa-python"></i> research_analyzer.py</span>
+                                </div>
+<pre><span class="keyword">class</span> <span class="class">ResearchAnalyzer</span>:
+    <span class="string">"""Analyzes data to answer research questions."""</span>
+    
+    <span class="keyword">def</span> <span class="function">analyze_rq1_frequency</span>(self):
+        <span class="comment"># Calculate hybrid issue frequency</span>
+        total = len(self.issues)
+        hybrid = len([i <span class="keyword">for</span> i <span class="keyword">in</span> self.issues <span class="keyword">if</span> i.is_hybrid_related])
+        <span class="keyword">return</span> {
+            <span class="string">'total_issues'</span>: total,
+            <span class="string">'hybrid_issues'</span>: hybrid,
+            <span class="string">'percentage'</span>: <span class="number">100</span> * hybrid / total
+        }
+    
+    <span class="keyword">def</span> <span class="function">analyze_rq2_categories</span>(self):
+        <span class="comment"># Count issues per category</span>
+        category_counts = Counter()
+        <span class="keyword">for</span> issue <span class="keyword">in</span> self.issues:
+            <span class="keyword">for</span> cat <span class="keyword">in</span> issue.categories:
+                category_counts[cat] += <span class="number">1</span>
+        <span class="keyword">return</span> category_counts
+    
+    <span class="keyword">def</span> <span class="function">analyze_rq4_domains</span>(self):
+        <span class="comment"># Compare patterns across domains</span>
+        domain_stats = defaultdict(list)
+        <span class="keyword">for</span> repo <span class="keyword">in</span> self.repositories:
+            domain_stats[repo.domain].append(repo)</pre>
+                            </div>
+                            
+                            <div class="data-flow">
+                                <h4><i class="fas fa-chart-pie"></i> Analysis Pipeline</h4>
+                                <div class="flow-items">
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-database"></i></div>
+                                        <span>Classified Data</span>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-calculator"></i></div>
+                                        <span>Statistics</span>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-question-circle"></i></div>
+                                        <span>RQ Answers</span>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-item">
+                                        <div class="icon-box"><i class="fas fa-file-pdf"></i></div>
+                                        <span>Report</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Details -->
+        <section class="tech-details">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Technical Implementation</h2>
+                    <p>Key technologies and design decisions behind the research pipeline</p>
+                </div>
+
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h4><i class="fas fa-folder-tree"></i> Project Structure</h4>
+                        <ul>
+                            <li><code>run_pipeline.py</code> - Main orchestrator</li>
+                            <li><code>src/collectors/</code> - F-Droid & GitHub collectors</li>
+                            <li><code>src/miners/</code> - Artifact mining modules</li>
+                            <li><code>src/classifiers/</code> - Issue classification</li>
+                            <li><code>src/analysis/</code> - Research analyzers</li>
+                            <li><code>data/raw/</code> - Raw collected data</li>
+                            <li><code>data/processed/</code> - Cleaned data</li>
+                            <li><code>results/</code> - Analysis outputs</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-card">
+                        <h4><i class="fas fa-cog"></i> Configuration</h4>
+                        <ul>
+                            <li>Domain keywords in <code>config.py</code></li>
+                            <li>Hybrid indicators list (Cordova, Flutter...)</li>
+                            <li>Issue category patterns</li>
+                            <li>API rate limits (2s delay)</li>
+                            <li>GitHub token (optional)</li>
+                            <li>Minimum star count filter</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-card">
+                        <h4><i class="fas fa-database"></i> Data Models</h4>
+                        <ul>
+                            <li><code>FDroidApp</code> - App metadata</li>
+                            <li><code>Repository</code> - GitHub repo info</li>
+                            <li><code>Issue</code> - Issue with classification</li>
+                            <li><code>Commit</code> - Commit metadata</li>
+                            <li><code>Domain</code> - Sensitive domain enum</li>
+                            <li><code>IssueCategory</code> - Classification enum</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-card">
+                        <h4><i class="fab fa-python"></i> Dependencies</h4>
+                        <ul>
+                            <li><code>requests</code> - HTTP client</li>
+                            <li><code>dataclasses</code> - Data models</li>
+                            <li><code>pathlib</code> - Path handling</li>
+                            <li><code>json</code> - Data serialization</li>
+                            <li><code>re</code> - Regex patterns</li>
+                            <li><code>collections</code> - Counter, defaultdict</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Architecture Diagram -->
+                <div class="architecture">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem;">System Architecture</h3>
+                    <div class="architecture-diagram">
+                        <div class="arch-layer">
+                            <h5>CLI Layer</h5>
+                            <div class="arch-modules">
+                                <div class="arch-module">run_pipeline.py</div>
+                                <div class="arch-module">argparse CLI</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; padding: 0.5rem; color: var(--text-light);">↓</div>
+                        <div class="arch-layer">
+                            <h5>Collection Layer</h5>
+                            <div class="arch-modules">
+                                <div class="arch-module">FDroidCollector</div>
+                                <div class="arch-module">GitHubCollector</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; padding: 0.5rem; color: var(--text-light);">↓</div>
+                        <div class="arch-layer">
+                            <h5>Mining Layer</h5>
+                            <div class="arch-modules">
+                                <div class="arch-module">ArtifactMiner</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; padding: 0.5rem; color: var(--text-light);">↓</div>
+                        <div class="arch-layer">
+                            <h5>Classification Layer</h5>
+                            <div class="arch-modules">
+                                <div class="arch-module">IssueClassifier</div>
+                                <div class="arch-module">Pattern Matching</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; padding: 0.5rem; color: var(--text-light);">↓</div>
+                        <div class="arch-layer">
+                            <h5>Analysis Layer</h5>
+                            <div class="arch-modules">
+                                <div class="arch-module">ResearchAnalyzer</div>
+                                <div class="arch-module">RQ1-RQ4 Analysis</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>ERIS Research Pipeline • <a href="results.html">View Results</a> • <a href="index.html">About Project</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToPhase(phaseId) {
+            document.getElementById(phaseId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Animate elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.phase-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Update active phase nav on scroll
+        const sections = document.querySelectorAll('section[id^="phase"]');
+        const navLinks = document.querySelectorAll('.phase-nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
